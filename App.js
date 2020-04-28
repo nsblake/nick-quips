@@ -4,6 +4,23 @@ import Constants from 'expo-constants';
 import { Audio } from 'expo-av';
 
 import QuipListItem from './src/components/QuipListItem';
+import quips from './assets/audio/audio_map.json';
+
+function getQuipJSX() {
+  let result;
+  let quipsJSX = [];
+  let i = 0;
+  quips.forEach((q) => {
+    quipsJSX.push(<QuipListItem key={i} quipName={q.name} />);
+    i++;
+  });
+  result = (
+    <ScrollView>
+      {quipsJSX}
+    </ScrollView>
+  );
+  return result;
+}
 
 export default function App() {
   return (
@@ -12,11 +29,7 @@ export default function App() {
         <Text style={styles.titleText}>NICK/QUIPS</Text>
       </View>
       <View style={styles.listContainer}>
-        <ScrollView>
-          <QuipListItem />
-          <QuipListItem />
-          <QuipListItem />
-        </ScrollView>
+        {getQuipJSX()}
       </View>
     </View>
   );
