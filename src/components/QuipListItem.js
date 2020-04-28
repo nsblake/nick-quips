@@ -19,6 +19,11 @@ const styles = StyleSheet.create({
   listItem: {
     height: 80,
     padding: 15,
+    margin: 10,
+    marginBottom: 0,
+    backgroundColor: '#FFFFFF',
+    borderRadius: 10,
+    elevation: 5,
     borderBottomWidth: 1,
     borderBottomColor: '#c5c5c5',
   },
@@ -27,7 +32,7 @@ const styles = StyleSheet.create({
   },
   quipText: {
     fontSize: 32,
-    color: '#333',
+    color: '#333333',
   },
   soundButton: {
     position: 'absolute',

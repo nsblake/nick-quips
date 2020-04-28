@@ -28,7 +28,7 @@ const styles = StyleSheet.create({
     marginTop: Constants.statusBarHeight,
   },
   titleContainer: {
-    backgroundColor: '#B3B6B7',
+    backgroundColor: '#000000',
     alignItems: 'center',
     justifyContent: 'center',
   },
@@ -38,6 +38,6 @@ const styles = StyleSheet.create({
   },
   titleText: {
     fontSize: 48,
-    color: '#333',
+    color: '#FFFFFF',
   }
 });
