@@ -1,7 +1,6 @@
 import React from 'react';
 import { StyleSheet, Text, View, ScrollView } from 'react-native';
 import Constants from 'expo-constants';
-import { Audio } from 'expo-av';
 
 import QuipListItem from './src/components/QuipListItem';
 import quips from './assets/audio/audio_map.json';

@@ -1,15 +1,37 @@
 import React from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 import { FontAwesome } from '@expo/vector-icons';
+import { Audio } from 'expo-av';
+
+const quipAudio = new Audio.Sound();
+
+function onPlayPressed() {
+  quipAudio.replayAsync();
+}
 
 export default function QuipListItem(props) {
+    (async () => {
+      if (!quipAudio._loading) {
+        try {
+          await quipAudio.loadAsync(require('../../assets/audio/Gallipol-xk-137_hifi.mp3'));
+        }
+        catch(error) {
+          console.warn("Error loading audio:" + error);
+        } 
+      }
+    })();
     return (
       <View style={styles.listItem}>
         <View style={styles.listItemTextContainer}>
           <Text style={styles.quipText}>{props.quipName}</Text>
         </View>
         <View style={styles.soundButton}>
-          <FontAwesome.Button name="volume-up" backgroundColor="transparent" color="#333" size={30} />
+          <FontAwesome.Button 
+            name="volume-up" 
+            backgroundColor="transparent" 
+            color="#333" 
+            size={30} 
+            onPress={onPlayPressed}/>
         </View>
       </View> 
     )
