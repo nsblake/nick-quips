@@ -11,7 +11,7 @@ function onPlayPressed() {
 
 export default function QuipListItem(props) {
     (async () => {
-      if (!quipAudio._loading) {
+      if (!(quipAudio._loading || quipAudio._loaded)) {
         try {
           await quipAudio.loadAsync(require('../../assets/audio/Gallipol-xk-137_hifi.mp3'));
         }
