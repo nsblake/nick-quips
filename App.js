@@ -1,10 +1,12 @@
 import React, { useState } from 'react';
-import { StyleSheet, Text, View, ScrollView, Modal, Button, TextInput } from 'react-native';
+import { StyleSheet, Text, View, ScrollView, Modal, Button } from 'react-native';
 import { FontAwesome } from '@expo/vector-icons';
 import Constants from 'expo-constants';
 
 import QuipListItem from './src/components/QuipListItem';
 import quips from './assets/audio/audio_map.json';
+import { sendEmail } from './send-email.js';
+import { emailAddress, aboutMessage } from './config';
 
 function getQuipJSX() {
   let result;
@@ -24,7 +26,6 @@ function getQuipJSX() {
 
 export default function App() {
   const [modalVisible, setModalVisible] = useState(false);
-  const [text, setText] = useState('');
   return (
     <View style={styles.container}>
       <Modal
@@ -34,27 +35,24 @@ export default function App() {
       >
         <View style={{ flex: 1, flexDirection: 'column' }}>
         <View style={{padding: 10}}>
-          <TextInput
-            placeholder="Send general feedback, quip requests, bug reports, etc."
-            onChangeText={text => setText(text)}
-            defaultValue={text}
-            multiline={true}
-          />
+          <Text style={styles.aboutMessage}>{aboutMessage}</Text>
         </View>
           <View style={styles.modalButtons}>
             <Button 
-              onPress={() => {
+              onPress={async () => {
                 setModalVisible(!modalVisible);
-                setText('');
+                await sendEmail(
+                  emailAddress,
+                  'NickQuips Feedback',
+                  '(Replace this text with general feedback, quip requests, bug reports, etc.)'
+                );
               }}
-              title="SUBMIT"
+              title="SUBMIT FEEDBACK"
               color="#2ECC71"
-              disabled={text == ''}
             />
             <Button 
               onPress={() => {
                 setModalVisible(!modalVisible);
-                setText('');
               }}
               title="CLOSE"
               color="#E74C3C"
@@ -63,10 +61,10 @@ export default function App() {
         </View>
       </Modal>
       <View style={styles.titleContainer}>
-        <Text style={styles.titleText}>NICK/QUIPS</Text>
+        <Text style={styles.titleText}>NICKQUIPS</Text>
         <View style={styles.openModal}>
           <FontAwesome.Button 
-            name="comment" 
+            name="bars" 
             backgroundColor="transparent" 
             color="#fff" 
             size={30} 
@@ -109,5 +107,12 @@ const styles = StyleSheet.create({
   openModal: {
     position: 'absolute',
     right: 0,
+  },
+  aboutMessage: {
+    fontSize: 18,
+    margin: 20,
+    textAlign: 'center',
+    color: "#333",
+    lineHeight: 28,
   },
 });
